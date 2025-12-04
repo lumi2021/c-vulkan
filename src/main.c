@@ -10,7 +10,6 @@ int main(int argc, char const *argv[])
     
     while (window_is_active()) {
         window_pool_events();
-
         window_update();
     }
 

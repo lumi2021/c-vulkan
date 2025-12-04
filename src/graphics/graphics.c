@@ -2,6 +2,7 @@
 #include <SDL3/SDL_vulkan.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <vulkan/vulkan_core.h>
 #include "graphics.h"
 
 const uint32_t WIDTH = 800;
@@ -50,6 +51,9 @@ bool vulkan_create_instance() {
 
     return true;
 }
+void vulkan_destroy_instance() {
+    vkDestroyInstance(instance, null);
+}
 
 
 bool init_window() {
@@ -91,7 +95,7 @@ bool init_graphics_api() {
     return true;
 }
 void deinit_graphics_api() {
-
+    vulkan_destroy_instance();
 }
 
 
