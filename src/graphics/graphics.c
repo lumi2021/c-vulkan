@@ -21,28 +21,29 @@ void glfw_error_callback(int code, const char* desc) {
 
 
 bool vulkan_create_instance() {
-    VkApplicationInfo appInfo;
-
-    appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName = "Hello Triangle";
-    appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-    appInfo.pEngineName = "No Engine";
-    appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-    appInfo.apiVersion = VK_API_VERSION_1_0;
-    appInfo.pNext = 0;
+    VkApplicationInfo appInfo = {
+        .sType = VK_STRUCTURE_TYPE_APPLICATION_INFO,
+        .pApplicationName = "Hello Triangle",
+        .applicationVersion = VK_MAKE_VERSION(1, 0, 0),
+        .pEngineName = "No Engine",
+        .engineVersion = VK_MAKE_VERSION(1, 0, 0),
+        .apiVersion = VK_API_VERSION_1_0,
+        .pNext = null
+    };
 
     uint32_t extensionCount = 0;
     const char *const *extensions;
     extensions = SDL_Vulkan_GetInstanceExtensions(&extensionCount);
 
-    VkInstanceCreateInfo createInfo;
-    createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    createInfo.pApplicationInfo = &appInfo;
-    createInfo.enabledExtensionCount = extensionCount;
-    createInfo.ppEnabledExtensionNames = extensions;
-    createInfo.enabledLayerCount = 0;
-    createInfo.flags = 0;
-    createInfo.pNext = 0;
+    VkInstanceCreateInfo createInfo = {
+        .sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+        .pApplicationInfo = &appInfo,
+        .enabledExtensionCount = extensionCount,
+        .ppEnabledExtensionNames = extensions,
+        .enabledLayerCount = 0,
+        .flags = 0,
+        .pNext = null
+    };
 
     if (vkCreateInstance(&createInfo, null, &instance) != VK_SUCCESS) {
         printf("ERROR: failed to create instance!");
